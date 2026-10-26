@@ -1,0 +1,187 @@
+/* Núcleo — tokens generados desde project/tokens.json (sistema de diseño del Panel de servidores) */
+:root {
+  --bg-000: #07090d;
+  --bg-100: #0e131a;
+  --bg-200: #151c26;
+  --line-100: #1f2833;
+  --line-200: #2c3846;
+  --ink: #e8edf3;
+  --ink-muted: #8b98a8;
+  --ink-faint: #5c6876;
+  --accent: #3ee0cf;
+  --accent-ink: #04110f;
+  --accent-soft: #0f2a2a;
+  --brass: #d4b483;
+  --ok: #4ade80;
+  --ok-soft: #0f2a1b;
+  --danger: #f87171;
+  --danger-soft: #2e1214;
+  --warn: #fbbf24;
+  --warn-soft: #2b2210;
+  --focus: var(--accent);
+
+  --font-sans: Manrope, "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Consolas, monospace;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+  --radius-pill: 999px;
+
+  --shadow-card: 0 1px 0 rgba(255,255,255,0.04) inset, 0 12px 32px rgba(0,0,0,0.40);
+  --shadow-glow: 0 0 0 1px rgba(62,224,207,0.35), 0 0 24px rgba(62,224,207,0.18);
+}
+
+[data-theme="light"] {
+  --bg-000: #f6f7f9;
+  --bg-100: #ffffff;
+  --bg-200: #eef1f5;
+  --line-100: #dde2e9;
+  --line-200: #c3cbd6;
+  --ink: #0d1218;
+  --ink-muted: #556170;
+  --ink-faint: #8a95a3;
+  --accent: #087068;
+  --accent-ink: #ffffff;
+  --accent-soft: #e0f4f1;
+  --brass: #8a6a35;
+  --ok: #166534;
+  --ok-soft: #e6f6ec;
+  --danger: #b91c1c;
+  --danger-soft: #fdecec;
+  --warn: #8a5a00;
+  --warn-soft: #fdf5e1;
+
+  --shadow-card: 0 1px 2px rgba(13,18,24,0.06), 0 10px 28px rgba(13,18,24,0.06);
+  --shadow-glow: 0 0 0 1px rgba(8,112,104,0.30), 0 6px 18px rgba(8,112,104,0.12);
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+
+/* Núcleo — clases de componentes. Prefijo nx-. Todo valor viene de las variables de arriba. */
+
+body { background: var(--bg-000); color: var(--ink); font-family: var(--font-sans); font-size: 15px; line-height: 22px; margin: 0; -webkit-font-smoothing: antialiased; }
+.nx-pad { padding: var(--space-4); }
+.nx-mono { font-family: var(--font-mono); }
+.nx-label { font-family: var(--font-mono); font-size: 11px; line-height: 16px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-muted); }
+
+/* ---------- Encabezado ---------- */
+.nx-header { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--space-6); padding: var(--space-8) 0 var(--space-6); border-bottom: 1px solid var(--line-100); flex-wrap: wrap; }
+.nx-header__brand { display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-3); }
+.nx-mark { width: 22px; height: 22px; border-radius: var(--radius-sm); background: var(--accent); display: grid; grid-template-columns: repeat(2, 4px); gap: 4px; place-content: center; }
+.nx-mark i { width: 4px; height: 4px; border-radius: 1px; background: var(--accent-ink); display: block; }
+.nx-header__title { margin: 0; font-size: 44px; line-height: 48px; font-weight: 600; letter-spacing: -.02em; max-width: 18ch; }
+.nx-header__desc { margin: var(--space-3) 0 0; color: var(--ink-muted); max-width: 60ch; }
+.nx-apistate { display: inline-flex; align-items: center; gap: var(--space-2); padding: 6px var(--space-3); border: 1px solid var(--line-200); border-radius: var(--radius-pill); font-family: var(--font-mono); font-size: 12px; color: var(--ink-muted); background: var(--bg-100); white-space: nowrap; }
+.nx-apistate b { color: var(--ink); font-weight: 500; }
+
+/* ---------- Punto de estado ---------- */
+.nx-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); flex: none; position: relative; }
+.nx-dot--on { background: var(--ok); box-shadow: 0 0 0 3px var(--ok-soft); }
+.nx-dot--off { background: transparent; border: 1.5px solid var(--danger); width: 7px; height: 7px; }
+.nx-dot--warn { background: var(--warn); }
+@media (prefers-reduced-motion: no-preference) {
+  .nx-dot--live::after { content: ""; position: absolute; inset: -4px; border-radius: 50%; border: 1px solid var(--ok); opacity: 0; animation: nx-ping 2.4s ease-out infinite; }
+}
+@keyframes nx-ping { 0% { transform: scale(.6); opacity: .7; } 100% { transform: scale(1.8); opacity: 0; } }
+
+/* ---------- Tarjeta y tarjeta de cifra ---------- */
+.nx-card { background: var(--bg-100); border: 1px solid var(--line-100); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); padding: var(--space-6); position: relative; }
+.nx-card__head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); margin-bottom: var(--space-4); }
+.nx-card__title { margin: 0; font-size: 17px; line-height: 24px; font-weight: 600; }
+.nx-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--space-4); }
+.nx-stat { display: flex; flex-direction: column; gap: var(--space-2); overflow: hidden; }
+.nx-stat::before { content: ""; position: absolute; top: 0; right: 0; width: 64px; height: 64px; background-image: radial-gradient(var(--ink-faint) 1px, transparent 1.5px); background-size: 8px 8px; opacity: .55; -webkit-mask-image: linear-gradient(225deg, #000, transparent 70%); mask-image: linear-gradient(225deg, #000, transparent 70%); }
+.nx-stat__value { font-family: var(--font-mono); font-size: 40px; line-height: 44px; font-weight: 500; letter-spacing: -.02em; color: var(--ink); font-variant-numeric: tabular-nums; }
+.nx-stat__value--brass { color: var(--brass); }
+.nx-stat__foot { font-size: 13px; line-height: 18px; color: var(--ink-muted); }
+
+/* ---------- Badge de estado ---------- */
+.nx-status { display: inline-flex; align-items: center; gap: var(--space-2); padding: 2px var(--space-2) 2px 6px; border-radius: var(--radius-sm); font-size: 12px; line-height: 20px; font-weight: 600; }
+.nx-status--on { background: var(--ok-soft); color: var(--ok); }
+.nx-status--off { background: var(--danger-soft); color: var(--danger); }
+
+/* ---------- Tabla de servidores ---------- */
+.nx-table-wrap { background: var(--bg-100); border: 1px solid var(--line-100); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); overflow-x: auto; }
+.nx-table { width: 100%; border-collapse: collapse; min-width: 420px; }
+.nx-table th { text-align: left; padding: var(--space-3) var(--space-6); font-family: var(--font-mono); font-size: 11px; line-height: 16px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-muted); border-bottom: 1px solid var(--line-100); }
+.nx-table td { padding: var(--space-3) var(--space-6); border-bottom: 1px solid var(--line-100); vertical-align: middle; }
+.nx-table tr:last-child td { border-bottom: 0; }
+.nx-table tbody tr:hover { background: var(--bg-200); }
+.nx-table tr.is-off td:first-child { color: var(--ink-muted); }
+.nx-table .nx-port { font-family: var(--font-mono); font-size: 13px; color: var(--ink-muted); }
+.nx-table .nx-port b { color: var(--ink); font-weight: 500; }
+.nx-table td.num, .nx-table th.num { text-align: right; }
+
+/* ---------- Botones ---------- */
+.nx-btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); height: 40px; padding: 0 var(--space-4); border-radius: var(--radius-md); border: 1px solid transparent; font: 600 14px/1 var(--font-sans); cursor: pointer; transition: background .15s, box-shadow .15s, border-color .15s, transform .05s; white-space: nowrap; }
+.nx-btn:active { transform: translateY(1px); }
+.nx-btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.nx-btn--primary { background: var(--accent); color: var(--accent-ink); }
+.nx-btn--primary:hover { box-shadow: var(--shadow-glow); }
+.nx-btn--ghost { background: transparent; color: var(--ink); border-color: var(--line-200); }
+.nx-btn--ghost:hover { background: var(--bg-200); }
+.nx-btn[disabled], .nx-btn.is-loading { opacity: .6; cursor: progress; }
+.nx-btn__kbd { font-family: var(--font-mono); font-size: 11px; font-weight: 500; opacity: .7; }
+.nx-spin { width: 14px; height: 14px; border-radius: 50%; border: 2px solid currentColor; border-right-color: transparent; animation: nx-rot .8s linear infinite; }
+@keyframes nx-rot { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .nx-spin { animation-duration: 2.4s; } }
+
+/* ---------- Resultado de solicitud ---------- */
+.nx-result { border-radius: var(--radius-lg); border: 1px solid var(--line-100); background: var(--bg-100); box-shadow: var(--shadow-card); overflow: hidden; }
+.nx-result--fresh { box-shadow: var(--shadow-glow); }
+.nx-result__top { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-4); padding: var(--space-6); background: var(--accent-soft); flex-wrap: wrap; }
+.nx-result__server { margin: var(--space-1) 0 0; font-size: 28px; line-height: 34px; font-weight: 600; letter-spacing: -.01em; }
+.nx-result__server span { color: var(--accent); }
+.nx-result__meta { font-family: var(--font-mono); font-size: 12px; line-height: 18px; color: var(--ink-muted); text-align: right; }
+.nx-result__meta b { color: var(--brass); font-weight: 500; }
+.nx-code { margin: 0; padding: var(--space-4) var(--space-6); font-family: var(--font-mono); font-size: 13px; line-height: 20px; color: var(--ink); background: var(--bg-100); white-space: pre-wrap; word-break: break-word; }
+.nx-code .k { color: var(--accent); }
+.nx-code .s { color: var(--brass); }
+.nx-code .n { color: var(--ok); }
+
+/* ---------- Barra de estadística ---------- */
+.nx-bars { display: flex; flex-direction: column; gap: var(--space-4); }
+.nx-bar { display: grid; grid-template-columns: minmax(96px, 160px) 1fr auto; align-items: center; gap: var(--space-4); }
+.nx-bar__name { font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.nx-bar__name small { display: block; font: 400 12px/16px var(--font-mono); color: var(--ink-muted); }
+.nx-bar__track { height: 8px; border-radius: var(--radius-sm); background: var(--bg-200); overflow: hidden; }
+.nx-bar__fill { height: 100%; border-radius: var(--radius-sm); background: var(--accent); transition: width .5s cubic-bezier(.2,.8,.2,1); }
+.nx-bar.is-off .nx-bar__fill { background: var(--ink-faint); }
+.nx-bar__count { font-family: var(--font-mono); font-size: 13px; color: var(--ink); text-align: right; min-width: 72px; font-variant-numeric: tabular-nums; }
+.nx-bar__count span { color: var(--ink-muted); }
+
+/* ---------- Alertas / mensajes del sistema ---------- */
+.nx-log { display: flex; flex-direction: column; gap: var(--space-2); }
+.nx-alert { display: grid; grid-template-columns: 24px 1fr auto; gap: var(--space-3); align-items: start; padding: var(--space-3) var(--space-4); border-radius: var(--radius-md); background: var(--accent-soft); color: var(--ink); font-size: 14px; line-height: 20px; }
+.nx-alert__icon { width: 20px; height: 20px; border-radius: var(--radius-sm); display: grid; place-items: center; font: 600 12px/1 var(--font-mono); color: var(--accent-ink); background: var(--accent); }
+.nx-alert__title { font-weight: 600; }
+.nx-alert__time { font: 400 12px/20px var(--font-mono); color: var(--ink-muted); white-space: nowrap; }
+.nx-alert--ok { background: var(--ok-soft); }
+.nx-alert--ok .nx-alert__icon { background: var(--ok); color: var(--bg-000); }
+.nx-alert--warn { background: var(--warn-soft); }
+.nx-alert--warn .nx-alert__icon { background: var(--warn); color: var(--bg-000); }
+.nx-alert--error { background: var(--danger-soft); }
+.nx-alert--error .nx-alert__icon { background: var(--danger); color: var(--bg-000); }
+
+/* ---------- Página (Panel de servidores) ---------- */
+.nx-page { max-width: 1200px; margin: 0 auto; padding: 0 var(--space-12); }
+.nx-section { margin-top: var(--space-8); }
+.nx-section__title { margin: 0 0 var(--space-4); font-size: 17px; line-height: 24px; font-weight: 600; }
+.nx-request-row { display: flex; align-items: center; gap: var(--space-4); margin-bottom: var(--space-4); flex-wrap: wrap; }
+.nx-table-actions { display: flex; justify-content: flex-end; margin-bottom: var(--space-4); }
+.nx-empty { color: var(--ink-muted); font-size: 14px; }
+
+@media (max-width: 720px) {
+  .nx-page { padding: 0 var(--space-4); }
+  .nx-header { padding: var(--space-6) 0 var(--space-4); }
+  .nx-header__title { font-size: 28px; line-height: 34px; }
+}

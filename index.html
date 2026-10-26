@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Panel de administración de servidores dinámicos</title>
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+<div class="nx-page">
+
+  <header class="nx-header">
+    <div>
+      <div class="nx-header__brand">
+        <span class="nx-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <span class="nx-label">Núcleo · Balanceador</span>
+      </div>
+      <h1 class="nx-header__title">Panel de administración de servidores dinámicos</h1>
+      <p class="nx-header__desc">Distribuye cada solicitud entre los servidores activos y muestra en tiempo real quién la atiende.</p>
+    </div>
+    <div style="display:flex; align-items:center; gap: var(--space-3);">
+      <span class="nx-apistate" id="api-state"><span class="nx-dot nx-dot--off" id="api-dot"></span>API <b id="api-text">verificando…</b></span>
+      <button class="nx-btn nx-btn--ghost" id="theme-toggle" type="button">Tema claro</button>
+    </div>
+  </header>
+
+  <section class="nx-section" id="resumen">
+    <h2 class="nx-section__title">Resumen del sistema</h2>
+    <div class="nx-stats">
+      <div class="nx-card nx-stat">
+        <span class="nx-label">Solicitudes atendidas</span>
+        <span class="nx-stat__value nx-stat__value--brass" id="stat-total">—</span>
+        <span class="nx-stat__foot">Desde /estadisticas</span>
+      </div>
+      <div class="nx-card nx-stat">
+        <span class="nx-label">Servidores configurados</span>
+        <span class="nx-stat__value" id="stat-configurados">—</span>
+        <span class="nx-stat__foot" id="stat-configurados-foot">—</span>
+      </div>
+      <div class="nx-card nx-stat">
+        <span class="nx-label">Último servidor</span>
+        <span class="nx-stat__value" id="stat-ultimo">—</span>
+        <span class="nx-stat__foot" id="stat-ultimo-foot">—</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="nx-section" id="servidores">
+    <h2 class="nx-section__title">Listado de servidores</h2>
+    <div class="nx-table-actions">
+      <button class="nx-btn nx-btn--ghost" id="btn-actualizar" type="button">↻ Actualizar</button>
+    </div>
+    <div class="nx-table-wrap">
+      <table class="nx-table">
+        <thead>
+          <tr><th>Servidor</th><th>Puerto</th><th>Estado</th><th class="num">Solicitudes</th></tr>
+        </thead>
+        <tbody id="tabla-servidores">
+          <tr><td colspan="4" class="nx-empty">Cargando servidores…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="nx-section" id="solicitudes">
+    <h2 class="nx-section__title">Gestión de solicitudes</h2>
+    <div class="nx-request-row">
+      <button class="nx-btn nx-btn--primary" id="btn-solicitar" type="button">Enviar solicitud <span class="nx-btn__kbd">GET /solicitar</span></button>
+    </div>
+    <div id="resultado-solicitud"></div>
+  </section>
+
+  <section class="nx-section" id="estadisticas">
+    <div class="nx-card">
+      <div class="nx-card__head">
+        <h3 class="nx-card__title">Estadísticas</h3>
+        <span class="nx-label" id="stat-bar-total">Total —</span>
+      </div>
+      <div class="nx-bars" id="barras-servidores">
+        <span class="nx-empty">Cargando estadísticas…</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="nx-section" id="mensajes">
+    <h2 class="nx-section__title">Mensajes del sistema</h2>
+    <div class="nx-log" id="log-mensajes"></div>
+  </section>
+
+</div>
+<script src="script.js"></script>
+</body>
+</html>
